@@ -44,8 +44,9 @@ namespace AutoDL
             toolTip1.SetToolTip(this.button2, "Ajouter un Channel / Vidéo / Playliste Youtube ici..");
             toolTip1.SetToolTip(this.BtnQuick, "Telecharger rapidement une vidéo");
             toolTip1.SetToolTip(this.button3, "Effacer un élément de la liste");
+            toolTip1.SetToolTip(this.BtnEdit, "Modifier un élément de la liste");
             toolTip1.SetToolTip(this.ButSave, "Sauvegarder la liste");
-            toolTip1.SetToolTip(this.ButStart, "Lancer le telechargement");
+            toolTip1.SetToolTip(this.ButStart, "Lancer le telechargement de toute la liste");
             toolTip1.SetToolTip(this.BtnSetting, "Options de l'application");
             toolTip1.SetToolTip(this.BtnInfo, "A propos...");
             toolTip1.SetToolTip(this.ButEnd, "Quitter");
@@ -71,9 +72,10 @@ namespace AutoDL
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
 
             ContextMenuList = new ContextMenuStrip();
-           // ContextMenuList.Items.Add("Cocher Tout", null, CocherTout_Click);
             listView1.ContextMenuStrip = ContextMenuList;
             listView1.MouseDown += ListView1_MouseDown;
+            listView1.MouseDoubleClick += listView1_MouseDoubleClick;
+            listView1.FullRowSelect = true;
 
 
         }
@@ -314,6 +316,7 @@ namespace AutoDL
             {
                 Minize_it();
             }
+
             listView1.Columns.Add("✓");
             listView1.CheckBoxes = true;
             listView1.FullRowSelect = true;
@@ -328,7 +331,6 @@ namespace AutoDL
             status.Text = "Temps restant : " + Frm2.TimeValue();
             LblTimeFinish.Top = status.Top;
             LblTimeFinish.Left = status.Left + status.Width + 30;
-          //  await Task.Delay(100); // on attend car sinon la fenetre ne se hide pas
             ChargeData(); // chargement de la base de donnée
             ButSave.Enabled = false;
 
@@ -521,9 +523,7 @@ namespace AutoDL
                 MessageBox.Show("Une erreur lors de la sauvegarde est survenue. Relancer avec les droits d'administrateur" + "\n" + e.Message.ToString());
             }
         }
-        private void textTime_TextChanged(object sender, EventArgs e)
-        { }
-
+       
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (CountDown > 0)
@@ -541,14 +541,17 @@ namespace AutoDL
 
         }
 
-
         private void button2_Click_2(object sender, EventArgs e)
         {
             ShowForm(3);
     
         }
 
-        
+        private void DelItem(int index)
+        {
+
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
@@ -570,8 +573,6 @@ namespace AutoDL
                 // Redimensionner les colonnes après la suppression de l'élément
                 listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
-
-
         }
 
         private void ListView1_MouseDown(object sender, MouseEventArgs e)
@@ -579,17 +580,18 @@ namespace AutoDL
             if (e.Button == MouseButtons.Right)
             {
                 var item = listView1.GetItemAt(e.X, e.Y);
+                ContextMenuList.Items.Clear();
                 if (item != null)
                 {
+                    listView1.FocusedItem = item;
                     string selectedItemName = item.SubItems[1].Text;
-                    ContextMenuList.Items.Clear();
                     ContextMenuList.Items.Add($"Cocher uniquement {selectedItemName}", null,CocherItem_Click);
                     ContextMenuList.Items.Add("Cocher Tout", null, CocherTout_Click);
                     ContextMenuList.Items.Add("Decocher Tout", null, DecocherTout_Click);
                     ContextMenuList.Items.Add("-", null, null);
                     ContextMenuList.Items.Add($"Démarrer {selectedItemName}", null, DemarrerItem_Click);
-                    ContextMenuList.Items.Add($"Modifier {selectedItemName}", null, null);
-                    ContextMenuList.Items.Add($"Supprimer {selectedItemName}", null, null);
+                    ContextMenuList.Items.Add($"Modifier {selectedItemName}", null, ModifyItem_Click);
+                    ContextMenuList.Items.Add($"Supprimer {selectedItemName}", null, DelItem_Click);
 
                 }
             }
@@ -621,8 +623,7 @@ namespace AutoDL
                 ButSave.Enabled = true;
             }
         }
-
-        private void DemarrerItem_Click(object obj, EventArgs e)
+        private void DemarrerItem_Click(object sender, EventArgs e)
         {
             string ItemName = listView1.SelectedItems[0].SubItems[1].Text;
             string YTLink = listView1.SelectedItems[0].SubItems[2].Text;
@@ -630,33 +631,113 @@ namespace AutoDL
             string NbV = listView1.SelectedItems[0].SubItems[4].Text;
             string FormatV = listView1.SelectedItems[0].SubItems[5].Text;
             string FormatA = listView1.SelectedItems[0].SubItems[6].Text;
-            StartProcessYTDLP(2, YTLink, Path, FormatV, FormatA, NbV);
-           
-            //MessageBox.Show(ItemName + "\n" + YTLink + "\n" + Path + "\n" + NbV + "\n" + FormatV + "\n" + FormatA);
-        }
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+            StartProcessYTDLP(2, YTLink, Path, FormatV, FormatA, NbV);          
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ModifyItem_Click(object sender, EventArgs e)
         {
+           if (Frm3 == null || Frm3.IsDisposed)
+            {
+                Frm3 = new Form3(this);
+            }
+            var selecteditem = listView1.FocusedItem;
+            string name = selecteditem.SubItems[1].Text;
+            string YtLink = selecteditem.SubItems[2].Text;
+            string Path = selecteditem.SubItems[3].Text;
+            string Nb = selecteditem.SubItems[4].Text;
+            string FormatV = selecteditem.SubItems[5].Text;
+            string FormatA = selecteditem.SubItems[6].Text;
+
+            Frm3.Modify(name, YtLink, Path, FormatV, FormatA, Nb);
+            Frm3.Show();
+            Frm3.BringToFront();
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var item = listView1.GetItemAt(e.X, e.Y);
+            if (item != null)
+            {
+
+                int subItemIndex = GetSubItemIndex(item, e.Location);
+
+                if (subItemIndex > 0)
+                {
+
+                    Rectangle cellBounds = item.SubItems[subItemIndex].Bounds;
+                    TextBox editBox = new TextBox
+                    {
+                        Bounds = cellBounds,
+                        Text = item.SubItems[subItemIndex].Text
+                    };
+                    listView1.Controls.Add(editBox);
+                    editBox.LostFocus += (s, ev) =>
+                    {
+                        item.SubItems[subItemIndex].Text = editBox.Text;
+                        listView1.Controls.Remove(editBox);
+                    };
+                    editBox.KeyDown += (s, ev) =>
+                    {
+                        if (ev.KeyCode == Keys.Enter)
+                        {
+                            item.SubItems[subItemIndex].Text = editBox.Text;
+                            listView1.Controls.Remove(editBox);
+                        }
+                        else if (ev.KeyCode == Keys.Escape) // Annuler si Échap est pressé
+                        {
+                            listView1.Controls.Remove(editBox);
+                        }
+                    };
+
+                    editBox.Focus();
+
+                }
+
+            }
             
         }
 
+        private int GetSubItemIndex(ListViewItem item, Point clickLocation)
+        {
+            for (int i = 0; i < listView1.Columns.Count; i++)
+            {
+                // Récupérer la largeur et les limites cumulatives des colonnes
+                int columnStart = 0;
+                for (int j = 0; j < i; j++)
+                {
+                    columnStart += listView1.Columns[j].Width; // Ajoute la largeur des colonnes précédentes
+                }
+                int columnEnd = columnStart + listView1.Columns[i].Width;
+
+                // Vérifiez si la position X du clic est dans les limites de la colonne
+                if (clickLocation.X >= columnStart && clickLocation.X <= columnEnd)
+                {
+                    return i; // Retourne l'index de la colonne correspondante
+                }
+            }
+            return -1; // Si aucune correspondance n'est trouvé
+        }
+        private void DelItem_Click(object sender, EventArgs e)
+        {
+            if (listView1.FocusedItem != null )
+            {
+                listView1.Items.Remove(listView1.FocusedItem);
+                ButSave.Enabled = true;
+            }
+        }
+   
         private void button4_Click_1(object sender, EventArgs e)
         {
             string info1 = "Programme créer par Defend Emmanuel @GoloG ";
             string info2 = "Contact : golog123@hotmail.com ";
             string info3 = "Version : " + this.ProductVersion.ToString();
-            MessageBox.Show(info1 + "\n\n" + info2 + "\n\n" + info3);
+            MessageBox.Show(info1 + "\n" + info2 + "\n" + info3);
         }
 
         private void BtnSetting_Click(object sender, EventArgs e)
         {
             Frm2.Show();
             Frm2.BringToFront();
-            //ShowForm(2);
         }
 
         private void BtnQuick_Click(object sender, EventArgs e)
@@ -694,9 +775,13 @@ namespace AutoDL
             forms[N].BringToFront();
         }
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-
+            var selecteditem = listView1.FocusedItem;
+            if (selecteditem != null)
+            {
+                ModifyItem_Click(sender, e);
+            }
         }
     }
 }

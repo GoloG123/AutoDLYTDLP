@@ -133,20 +133,23 @@
   <data name="LabelDL50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LabelDL50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BtnStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnStart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="quick50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\quick50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BtnInfo50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnInfo50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BtnSave25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnSave25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnUp25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnUp25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BtnStart70px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnStart70px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BtnSave15px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnSave15px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="quick50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\quick50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="quick25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\quick25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,16 +166,19 @@
   <data name="BtnExit50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnExit50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BtnSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BtnInfo50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnInfo50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BtnSave25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnSave25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BtnStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnStart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BtnInfo25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnInfo25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BtnUp25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnUp25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BtnEdit25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnEdit25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnEdit50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnEdit50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

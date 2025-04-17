@@ -73,6 +73,26 @@ namespace AutoDL.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BtnEdit25px {
+            get {
+                object obj = ResourceManager.GetObject("BtnEdit25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BtnEdit50px {
+            get {
+                object obj = ResourceManager.GetObject("BtnEdit50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BtnExit50px {
             get {
                 object obj = ResourceManager.GetObject("BtnExit50px", resourceCulture);

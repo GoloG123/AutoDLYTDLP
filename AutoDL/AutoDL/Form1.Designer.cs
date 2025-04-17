@@ -33,26 +33,28 @@ namespace AutoDL
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BtnQuick = new System.Windows.Forms.Button();
-            this.BtnInfo = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.LblTimeFinish = new System.Windows.Forms.Label();
             this.status = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.BtnEdit = new System.Windows.Forms.Button();
+            this.BtnQuick = new System.Windows.Forms.Button();
+            this.BtnInfo = new System.Windows.Forms.Button();
             this.BtnSetting = new System.Windows.Forms.Button();
             this.ButEnd = new System.Windows.Forms.Button();
             this.ButSave = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.ButStart = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.BtnEdit);
             this.groupBox1.Controls.Add(this.BtnQuick);
             this.groupBox1.Controls.Add(this.BtnInfo);
             this.groupBox1.Controls.Add(this.groupBox4);
@@ -69,27 +71,6 @@ namespace AutoDL
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto Download Youtube";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
-            // BtnQuick
-            // 
-            this.BtnQuick.Image = global::AutoDL.Properties.Resources.quick50px;
-            this.BtnQuick.Location = new System.Drawing.Point(466, 21);
-            this.BtnQuick.Name = "BtnQuick";
-            this.BtnQuick.Size = new System.Drawing.Size(90, 70);
-            this.BtnQuick.TabIndex = 24;
-            this.BtnQuick.UseVisualStyleBackColor = true;
-            this.BtnQuick.Click += new System.EventHandler(this.BtnQuick_Click);
-            // 
-            // BtnInfo
-            // 
-            this.BtnInfo.Image = global::AutoDL.Properties.Resources.BtnInfo40px;
-            this.BtnInfo.Location = new System.Drawing.Point(964, 20);
-            this.BtnInfo.Name = "BtnInfo";
-            this.BtnInfo.Size = new System.Drawing.Size(75, 75);
-            this.BtnInfo.TabIndex = 23;
-            this.BtnInfo.UseVisualStyleBackColor = true;
-            this.BtnInfo.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // groupBox4
             // 
@@ -119,6 +100,57 @@ namespace AutoDL
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(2, 18);
             this.status.TabIndex = 6;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(10, 101);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(1286, 518);
+            this.listView1.TabIndex = 14;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // BtnEdit
+            // 
+            this.BtnEdit.Image = global::AutoDL.Properties.Resources.BtnEdit50px;
+            this.BtnEdit.Location = new System.Drawing.Point(257, 20);
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.Size = new System.Drawing.Size(75, 75);
+            this.BtnEdit.TabIndex = 25;
+            this.BtnEdit.UseVisualStyleBackColor = true;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
+            // 
+            // BtnQuick
+            // 
+            this.BtnQuick.Image = global::AutoDL.Properties.Resources.quick50px;
+            this.BtnQuick.Location = new System.Drawing.Point(466, 21);
+            this.BtnQuick.Name = "BtnQuick";
+            this.BtnQuick.Size = new System.Drawing.Size(90, 70);
+            this.BtnQuick.TabIndex = 24;
+            this.BtnQuick.UseVisualStyleBackColor = true;
+            this.BtnQuick.Click += new System.EventHandler(this.BtnQuick_Click);
+            // 
+            // BtnInfo
+            // 
+            this.BtnInfo.Image = global::AutoDL.Properties.Resources.BtnInfo40px;
+            this.BtnInfo.Location = new System.Drawing.Point(964, 20);
+            this.BtnInfo.Name = "BtnInfo";
+            this.BtnInfo.Size = new System.Drawing.Size(75, 75);
+            this.BtnInfo.TabIndex = 23;
+            this.BtnInfo.UseVisualStyleBackColor = true;
+            this.BtnInfo.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // BtnSetting
             // 
@@ -181,29 +213,6 @@ namespace AutoDL
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(10, 101);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1286, 518);
-            this.listView1.TabIndex = 14;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -241,6 +250,7 @@ namespace AutoDL
         private ContextMenuStrip contextMenuStrip1;
         private ContextMenuStrip ContextMenuList;
         private ContextMenuStrip ContextMenuStrip2;
+        private Button BtnEdit;
     }
 }
 

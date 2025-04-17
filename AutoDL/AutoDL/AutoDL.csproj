@@ -24,8 +24,8 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>40</ApplicationRevision>
-    <ApplicationVersion>1.0.0.40</ApplicationVersion>
+    <ApplicationRevision>41</ApplicationRevision>
+    <ApplicationVersion>1.0.0.41</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -167,6 +167,8 @@
     <None Include="Resources\quick50px.png" />
     <None Include="Resources\quick25px.png" />
     <None Include="Resources\BtnUp25px.png" />
+    <None Include="Resources\BtnEdit25px.png" />
+    <None Include="Resources\BtnEdit50px.png" />
     <Content Include="youtube_108041.ico" />
   </ItemGroup>
   <ItemGroup>

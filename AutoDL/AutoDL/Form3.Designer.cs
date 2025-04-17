@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BtnSave = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.BtnClip = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtNumber = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.textbxLink = new System.Windows.Forms.TextBox();
             this.textbxDest = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.BtnSave = new System.Windows.Forms.Button();
+            this.BtnClip = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,15 +71,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ajouter :";
             // 
-            // BtnSave
+            // label3
             // 
-            this.BtnSave.Image = global::AutoDL.Properties.Resources.AddBtn;
-            this.BtnSave.Location = new System.Drawing.Point(680, 215);
-            this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(60, 60);
-            this.BtnSave.TabIndex = 35;
-            this.BtnSave.UseVisualStyleBackColor = true;
-            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(437, 205);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 16);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Format audio :";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "webm",
+            "m4a"});
+            this.comboBox2.Location = new System.Drawing.Point(440, 235);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.TabIndex = 36;
             // 
             // label2
             // 
@@ -92,6 +103,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "webm",
@@ -101,24 +113,14 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 33;
             // 
-            // BtnClip
-            // 
-            this.BtnClip.Image = global::AutoDL.Properties.Resources.BtnPastBis25px;
-            this.BtnClip.Location = new System.Drawing.Point(680, 36);
-            this.BtnClip.Name = "BtnClip";
-            this.BtnClip.Size = new System.Drawing.Size(60, 60);
-            this.BtnClip.TabIndex = 31;
-            this.BtnClip.UseVisualStyleBackColor = true;
-            this.BtnClip.Click += new System.EventHandler(this.BtnClip_Click);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(6, 206);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(189, 16);
+            this.label7.Size = new System.Drawing.Size(109, 16);
             this.label7.TabIndex = 30;
-            this.label7.Text = "Nombre vidéos (99 si playlist) :";
+            this.label7.Text = "Nombre vidéos  :";
             // 
             // txtNumber
             // 
@@ -143,16 +145,6 @@
             this.label5.Size = new System.Drawing.Size(42, 16);
             this.label5.TabIndex = 29;
             this.label5.Text = "Nom :";
-            // 
-            // button1
-            // 
-            this.button1.Image = global::AutoDL.Properties.Resources.BtnFolder25px;
-            this.button1.Location = new System.Drawing.Point(680, 149);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 60);
-            this.button1.TabIndex = 28;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textbxLink
             // 
@@ -189,25 +181,35 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "Dossier destination :";
             // 
-            // comboBox2
+            // BtnSave
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "webm",
-            "m4a"});
-            this.comboBox2.Location = new System.Drawing.Point(440, 235);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 24);
-            this.comboBox2.TabIndex = 36;
+            this.BtnSave.Image = global::AutoDL.Properties.Resources.AddBtn;
+            this.BtnSave.Location = new System.Drawing.Point(680, 215);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(60, 60);
+            this.BtnSave.TabIndex = 35;
+            this.BtnSave.UseVisualStyleBackColor = true;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // label3
+            // BtnClip
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(437, 205);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 16);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "Format audio :";
+            this.BtnClip.Image = global::AutoDL.Properties.Resources.BtnPastBis25px;
+            this.BtnClip.Location = new System.Drawing.Point(680, 36);
+            this.BtnClip.Name = "BtnClip";
+            this.BtnClip.Size = new System.Drawing.Size(60, 60);
+            this.BtnClip.TabIndex = 31;
+            this.BtnClip.UseVisualStyleBackColor = true;
+            this.BtnClip.Click += new System.EventHandler(this.BtnClip_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = global::AutoDL.Properties.Resources.BtnFolder25px;
+            this.button1.Location = new System.Drawing.Point(680, 149);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 60);
+            this.button1.TabIndex = 28;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form3
             // 
@@ -221,6 +223,7 @@
             this.Name = "Form3";
             this.ShowIcon = false;
             this.Text = "AutoDL Ajouter :";
+            this.Load += new System.EventHandler(this.Form3_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
