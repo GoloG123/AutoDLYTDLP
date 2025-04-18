@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using System.Net.Http;
 
 namespace AutoDL
 {
@@ -30,18 +31,19 @@ namespace AutoDL
             toolTip1.ShowAlways = true;
             toolTip1.SetToolTip(BtnUp, "Mis à jour de YT-DLP.exe");
             toolTip1.SetToolTip(butDLP, "Définir emplacement YT-DLP.exe");
-            
+
         }
 
         public async void UpdateYTDLP()
         {
             string ver = GetVersionYTDLP(textbxYTeXe.Text);
-            LblVer.Text = "Version : " + ver;
+            LblVer.ForeColor = Color.Black;
+            LblVer.Text = "Version : " + ver + " , recherche en cours...";
             await Task.Delay(1000);
             Process t = new Process();
             t = new Process();
-            t.StartInfo.Arguments = "-U"; 
-            t.StartInfo.FileName = textbxYTeXe.Text; 
+            t.StartInfo.Arguments = "-U";
+            t.StartInfo.FileName = textbxYTeXe.Text;
             t.StartInfo.UseShellExecute = true;
             t.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             t.Start();
@@ -50,9 +52,10 @@ namespace AutoDL
             string ver2 = GetVersionYTDLP(textbxYTeXe.Text);
             if (ver != ver2)
             {
-                MessageBox.Show("Nouvelle mis à jour de YT-DLP.exe en version :" + "\n" + ver2,"Mis à jours réussie...",0,MessageBoxIcon.Exclamation);
+                MessageBox.Show("Nouvelle mis à jour de YT-DLP.exe en version :" + "\n" + ver2, "Mis à jours réussie...", 0, MessageBoxIcon.Exclamation);
             }
             LblVer.Text = "Version : " + ver2;
+            LblVer.ForeColor = Color.Green;
             BtnUp.Enabled = true;
 
         }
@@ -78,6 +81,14 @@ namespace AutoDL
         {
             CheckBoot.Checked = value;
         }
+        public void SetAutoUp(bool value)
+        {
+            CheckUpdate.Checked = value;
+        }
+        public string CheckAutoUp()
+        {
+            return CheckUpdate.Checked.ToString();
+        }
         public void SetYTExe(string value)
         {
             textbxYTeXe.Text = value;
@@ -96,6 +107,7 @@ namespace AutoDL
             {
                 BtnUp.Enabled = true;
             }
+            LblVersion.Text = "Version : " + this.ProductVersion.ToString();
 
         }
 
@@ -123,14 +135,26 @@ namespace AutoDL
 
             if (dlg1.FileName != "")
             {
-                string ici1 = dlg1.FileName.ToString();
-                textbxYTeXe.Text = ici1;// + @"\";
-                string ffmpeg = Path.GetDirectoryName(ici1) + @"\ffmpeg.exe";
-                if (!File.Exists(ffmpeg))
+                if (dlg1.FileName.Contains("yt-dlp.exe"))
                 {
-                    MessageBox.Show("L'application FFMPEG.EXE n'existe pas dans le même dossier que YT-DLP.EXE." + "\n" + "Veuillez mettre l'application FFMPEG.EXE pour poursuivre.");
+                    string PathA = dlg1.FileName.ToString();
+                    textbxYTeXe.Text = PathA;
+                    string ffmpeg = Path.GetDirectoryName(PathA) + @"\ffmpeg.exe";
+                    if (!File.Exists(ffmpeg))
+                    {
+                        MessageBox.Show("L'application FFMPEG.EXE n'existe pas dans le même dossier que YT-DLP.EXE." + "\n" + "Veuillez mettre l'application FFMPEG.EXE pour poursuivre.");
 
-                    return;
+                        return;
+                    }
+                    else
+                    {
+                        lblFFmpeg.Text = "FFMpeg présent";
+                        lblFFmpeg.ForeColor = System.Drawing.Color.Green;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Le fichier selectionner n'est pas yt-dlp.exe", "Auto DL - Error", 0, MessageBoxIcon.Error);
                 }
             }
         }
@@ -179,9 +203,70 @@ namespace AutoDL
             UpdateYTDLP();
         }
 
-        private void textTime_TextChanged(object sender, EventArgs e)
+        public async void UpdateApp()
         {
+            string Cuvers = this.ProductVersion.ToString();
+            string WebVerUrl = "https://raw.githubusercontent.com/GoloG123/AutoDLYTDLP/main/version";
+            LblVersion.Text = "Recherche en cours..";
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    client.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue
+                    {
+                        NoCache = true
+                    };
 
+                    string onlineversion = await client.GetStringAsync(WebVerUrl);
+                    LblVersion.Text = "Version en ligne : " + onlineversion.ToString();
+
+                    if (onlineversion.Trim() != Cuvers)
+                    {
+                       DialogResult Upt =  MessageBox.Show("Une nouvelle version est disponible : " + onlineversion,"Auto DL - Mise à jour",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (Upt == DialogResult.Yes)
+                        {
+                            UpgradeApp();
+                        }
+                    }
+                    else
+                    {
+                        LblVersion.Text = "Version à jours : " + onlineversion;
+                    }
+                    
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+
+        }
+        public async void UpgradeApp() 
+        {
+            string WebApp = "https://github.com/GoloG123/AutoDLYTDLP/releases/download/Release/AutoDL.exe";
+            string DlFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"AutoDL.exe");
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                   LblVersion.Text = "Telechargement en cours...";
+                   byte[] filedata = await client.GetByteArrayAsync(WebApp);
+                   File.WriteAllBytes(DlFolder,filedata);
+                   LblVersion.Text = "Telechargement terminé dans : " + DlFolder;
+
+                }
+                catch (Exception e) 
+                {
+                    MessageBox.Show($"{e.Message}");
+                }
+            }
+
+        }
+
+        private void btnUpg_Click(object sender, EventArgs e)
+        {
+            UpdateApp();
+           // UpgradeApp();
         }
     }
 }

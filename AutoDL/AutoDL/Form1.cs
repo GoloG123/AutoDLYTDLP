@@ -17,6 +17,9 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.Win32;
 using ToolTip = System.Windows.Forms.ToolTip;
+
+
+
 namespace AutoDL
 {
 
@@ -345,36 +348,46 @@ namespace AutoDL
             //notifyIcon.ShowBalloonTip(0, "Auto Download Youtube", "L'application est maintenant dans la barre de notification.", ToolTipIcon.Info);
         }
         public void ChargeConfig()
-        {
+        {                     
             try
-            {  
-            string UserPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\config.ini";
-            string ChargeData = File.ReadAllText(UserPath);
+            {
+                string FolderApp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AutoDl");
+                string ConfigFile = Path.Combine(FolderApp, "config.ini");
+                if (!File.Exists(ConfigFile))
+                {
+                    MessageBox.Show("Première utilisation de AutoDl, veuillez lié l'executable YT-DL.exe");
+                    return;
+                }
+                    
+            string ChargeData = File.ReadAllText(ConfigFile);
             string[] data = ChargeData.Split(new char[] { ';' });
                 Frm2.SetCheckMini(bool.Parse(data[0]));
                 Frm2.SetCheckBoot(bool.Parse(data[1]));
-                Frm2.SetTime(int.Parse(data[2]));
-                Frm2.SetYTExe(data[3]);
-                if (int.Parse(data[2]) > 0)
+                Frm2.SetAutoUp(bool.Parse(data[2]));
+                Frm2.SetTime(int.Parse(data[3]));
+                Frm2.SetYTExe(data[4]);
+                if (int.Parse(data[3]) > 0)
                 {
-                    CountDown = int.Parse(data[2]) * 60;
+                    CountDown = int.Parse(data[3]) * 60;
                     timer1.Enabled = true;
                 }
-               
             }
             catch (Exception e)
-            {
-              MessageBox.Show("Une erreur lors du chargement des données est survenue :" + "\n" + e.Message);
-            }
-
-            
+            {          
+                MessageBox.Show("Une erreur lors du chargement des données est survenue :" + "\n" + e.Message);
+            }           
             }
         private void ChargeData()
         {
             try
             {
-                string UserPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\data.txt";
-                string BaseData = File.ReadAllText(UserPath);
+                string FolderApp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AutoDl");
+                string FileData = Path.Combine(FolderApp, "data.txt");
+                if (!File.Exists(FileData))
+                {
+                    return;
+                }
+                string BaseData = File.ReadAllText(FileData);
                 string[] lines = BaseData.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
                 listView1.Items.Clear();
                 foreach (string line in lines)
@@ -474,33 +487,44 @@ namespace AutoDL
                 }
                 if (!int.TryParse(Frm2.TimeValue(), out _))
                 {
-                    MessageBox.Show("Le temps doit être supérieur à zéro");
+                    MessageBox.Show("Le temps doit être supérieur ou égale à zéro","Auto Dl - Erreur");
                     Frm2.SetTime(30);
                 }
                 else
                 {
                     if (Frm2.GetYTexe() == "")
                     {
-                        MessageBox.Show("Veuillez définir où est YT-DL.EXE");
+                        MessageBox.Show("Veuillez définir où est YT-DL.EXE","Auto Dl - Erreur");
                         Frm2.Show();
                         return;
                     }
-                    string DataSave = Frm2.CheckMinit() + ";" + Frm2.CheckBt() + ";" + Frm2.TimeValue() + ";" + Frm2.GetYTexe() + ";";
-                    string UserPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\config.ini";
-                    File.WriteAllText(UserPath, DataSave);
+                    string FolderApp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AutoDl");
+                    string ConfigFile = Path.Combine(FolderApp, "config.ini");
+                    if (!Directory.Exists(FolderApp))
+                    {
+                        Directory.CreateDirectory(FolderApp);
+                    }
+                    string DataSave = Frm2.CheckMinit() + ";" + Frm2.CheckBt() + ";" + Frm2.CheckAutoUp() + ";" + Frm2.TimeValue() + ";" + Frm2.GetYTexe() + ";";
+                    File.WriteAllText(ConfigFile, DataSave);
                     status.Text = "Options sauver..";
                 }
             }
             catch (Exception ex) 
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Erreur lors de la sauvegarde : " + "\n" + ex.Message);
              }
         }
         private void SaveData()
         {
             try
             {
-                    string UserPathData = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\data.txt";
+                string FolderApp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AutoDl");
+                string FileData = Path.Combine(FolderApp, "data.txt");
+                if (!Directory.Exists(FolderApp))
+                {
+                    Directory.CreateDirectory(FolderApp);
+                    
+                }
                     string DataBase = "";
                     foreach (ListViewItem item in listView1.Items)
                     {
@@ -511,7 +535,7 @@ namespace AutoDL
                         }
                         DataBase += Environment.NewLine;
                     }
-                    File.WriteAllText(UserPathData, DataBase);
+                    File.WriteAllText(FileData, DataBase);
                    
                     status.Text = "Sauver...";
                 
@@ -520,7 +544,7 @@ namespace AutoDL
             }
             catch (Exception e)
             {
-                MessageBox.Show("Une erreur lors de la sauvegarde est survenue. Relancer avec les droits d'administrateur" + "\n" + e.Message.ToString());
+                MessageBox.Show("Une erreur lors de la sauvegarde est survenue :" + "\n" + e.Message.ToString());
             }
         }
        
@@ -545,11 +569,6 @@ namespace AutoDL
         {
             ShowForm(3);
     
-        }
-
-        private void DelItem(int index)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -731,7 +750,7 @@ namespace AutoDL
             string info1 = "Programme créer par Defend Emmanuel @GoloG ";
             string info2 = "Contact : golog123@hotmail.com ";
             string info3 = "Version : " + this.ProductVersion.ToString();
-            MessageBox.Show(info1 + "\n" + info2 + "\n" + info3);
+            MessageBox.Show(info1 + "\n" + info2 + "\n" + info3,"Auto Dl - Informations",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void BtnSetting_Click(object sender, EventArgs e)
