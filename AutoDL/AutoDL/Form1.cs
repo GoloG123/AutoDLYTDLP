@@ -211,7 +211,7 @@ namespace AutoDL
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Une erreur est survenue : " + ex.Message);
+                            MessageBox.Show($"Une erreur est survenue : {ex.Message}",this.Text,0,MessageBoxIcon.Error);
                             ButStart.Enabled = true;
                             status.Text = "Erreur..." + ex.Message;
 
@@ -246,7 +246,7 @@ namespace AutoDL
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Une erreur est survenue : " + ex.Message);
+                        MessageBox.Show($"Une erreur est survenue : {ex.Message}", this.Text, 0, MessageBoxIcon.Error);
                         ButStart.Enabled = true;
                         status.Text = "Erreur..." + ex.Message;
 
@@ -298,7 +298,7 @@ namespace AutoDL
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Une erreur est survenue : " + ex.Message);
+                        MessageBox.Show($"Une erreur est survenue : {ex.Message}", this.Text, 0, MessageBoxIcon.Error);
                         ButStart.Enabled = true;
                         status.Text = "Erreur..." + ex.Message;
 
@@ -371,10 +371,14 @@ namespace AutoDL
                     CountDown = int.Parse(data[3]) * 60;
                     timer1.Enabled = true;
                 }
+                if (bool.Parse(data[2]) == true)
+                {
+                    Frm2.UpdateApp();
+                }
             }
             catch (Exception e)
-            {          
-                MessageBox.Show("Une erreur lors du chargement des données est survenue :" + "\n" + e.Message);
+            {
+                MessageBox.Show("Une erreur lors du chargement des données est survenue : {e.Message}", this.Text, 0, MessageBoxIcon.Error);
             }           
             }
         private void ChargeData()
@@ -415,7 +419,7 @@ namespace AutoDL
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show($"Une erreur est survenue : {e.Message}", this.Text, 0, MessageBoxIcon.Error);
             }
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
@@ -511,8 +515,8 @@ namespace AutoDL
             }
             catch (Exception ex) 
             {
-                MessageBox.Show("Erreur lors de la sauvegarde : " + "\n" + ex.Message);
-             }
+                MessageBox.Show($"Une erreur est survenue lors de la sauvegarde : {ex.Message}", this.Text, 0, MessageBoxIcon.Error);
+            }
         }
         private void SaveData()
         {
@@ -544,7 +548,7 @@ namespace AutoDL
             }
             catch (Exception e)
             {
-                MessageBox.Show("Une erreur lors de la sauvegarde est survenue :" + "\n" + e.Message.ToString());
+                MessageBox.Show($"Une erreur est survenue : {e.Message}", this.Text, 0, MessageBoxIcon.Error);
             }
         }
        
@@ -567,8 +571,7 @@ namespace AutoDL
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            ShowForm(3);
-    
+            ShowForm(3); 
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -593,7 +596,6 @@ namespace AutoDL
                 listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
         }
-
         private void ListView1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -611,7 +613,6 @@ namespace AutoDL
                     ContextMenuList.Items.Add($"Démarrer {selectedItemName}", null, DemarrerItem_Click);
                     ContextMenuList.Items.Add($"Modifier {selectedItemName}", null, ModifyItem_Click);
                     ContextMenuList.Items.Add($"Supprimer {selectedItemName}", null, DelItem_Click);
-
                 }
             }
         }
@@ -677,12 +678,10 @@ namespace AutoDL
             var item = listView1.GetItemAt(e.X, e.Y);
             if (item != null)
             {
-
                 int subItemIndex = GetSubItemIndex(item, e.Location);
 
                 if (subItemIndex > 0)
                 {
-
                     Rectangle cellBounds = item.SubItems[subItemIndex].Bounds;
                     TextBox editBox = new TextBox
                     {
@@ -758,7 +757,6 @@ namespace AutoDL
             Frm2.Show();
             Frm2.BringToFront();
         }
-
         private void BtnQuick_Click(object sender, EventArgs e)
         {
             ShowForm(4);
@@ -793,7 +791,6 @@ namespace AutoDL
             forms[N].Show();
             forms[N].BringToFront();
         }
-
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             var selecteditem = listView1.FocusedItem;

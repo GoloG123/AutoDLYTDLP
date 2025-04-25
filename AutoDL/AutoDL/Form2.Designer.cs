@@ -34,14 +34,14 @@
             this.BtnUp = new System.Windows.Forms.Button();
             this.LblVer = new System.Windows.Forms.Label();
             this.butDLP = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.LblYtExe = new System.Windows.Forms.Label();
             this.textbxYTeXe = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnUpg = new System.Windows.Forms.Button();
             this.CheckUpdate = new System.Windows.Forms.CheckBox();
             this.LblVersion = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LblMinute = new System.Windows.Forms.Label();
             this.textTime = new System.Windows.Forms.TextBox();
             this.CheckBoot = new System.Windows.Forms.CheckBox();
             this.CheckMini = new System.Windows.Forms.CheckBox();
@@ -56,7 +56,7 @@
             this.groupBox2.Controls.Add(this.BtnUp);
             this.groupBox2.Controls.Add(this.LblVer);
             this.groupBox2.Controls.Add(this.butDLP);
-            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.LblYtExe);
             this.groupBox2.Controls.Add(this.textbxYTeXe);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
@@ -87,7 +87,7 @@
             // LblVer
             // 
             this.LblVer.AutoSize = true;
-            this.LblVer.Location = new System.Drawing.Point(230, 33);
+            this.LblVer.Location = new System.Drawing.Point(21, 88);
             this.LblVer.Name = "LblVer";
             this.LblVer.Size = new System.Drawing.Size(0, 16);
             this.LblVer.TabIndex = 14;
@@ -102,14 +102,14 @@
             this.butDLP.UseVisualStyleBackColor = true;
             this.butDLP.Click += new System.EventHandler(this.butDLP_Click);
             // 
-            // label3
+            // LblYtExe
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 33);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(165, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Liens application YT-DLP :";
+            this.LblYtExe.AutoSize = true;
+            this.LblYtExe.Location = new System.Drawing.Point(21, 33);
+            this.LblYtExe.Name = "LblYtExe";
+            this.LblYtExe.Size = new System.Drawing.Size(165, 16);
+            this.LblYtExe.TabIndex = 1;
+            this.LblYtExe.Text = "Liens application YT-DLP :";
             // 
             // textbxYTeXe
             // 
@@ -165,7 +165,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.LblMinute);
             this.groupBox3.Controls.Add(this.textTime);
             this.groupBox3.Location = new System.Drawing.Point(316, 32);
             this.groupBox3.Name = "groupBox3";
@@ -174,14 +174,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Téléchargement Automatique :";
             // 
-            // label2
+            // LblMinute
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 16);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Minutes :";
+            this.LblMinute.AutoSize = true;
+            this.LblMinute.Location = new System.Drawing.Point(32, 28);
+            this.LblMinute.Name = "LblMinute";
+            this.LblMinute.Size = new System.Drawing.Size(59, 16);
+            this.LblMinute.TabIndex = 5;
+            this.LblMinute.Text = "Minutes :";
             // 
             // textTime
             // 
@@ -240,13 +240,13 @@
 
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button butDLP;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LblYtExe;
         private System.Windows.Forms.TextBox textbxYTeXe;
         private System.Windows.Forms.Label LblVer;
         private System.Windows.Forms.Button BtnUp;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblMinute;
         private System.Windows.Forms.TextBox textTime;
         private System.Windows.Forms.CheckBox CheckBoot;
         private System.Windows.Forms.CheckBox CheckMini;

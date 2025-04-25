@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 
 namespace AutoDL
 {
@@ -36,6 +37,7 @@ namespace AutoDL
 
         public async void UpdateYTDLP()
         {
+            lblFFmpeg.Text = null;
             string ver = GetVersionYTDLP(textbxYTeXe.Text);
             LblVer.ForeColor = Color.Black;
             LblVer.Text = "Version : " + ver + " , recherche en cours...";
@@ -142,7 +144,7 @@ namespace AutoDL
                     string ffmpeg = Path.GetDirectoryName(PathA) + @"\ffmpeg.exe";
                     if (!File.Exists(ffmpeg))
                     {
-                        MessageBox.Show("L'application FFMPEG.EXE n'existe pas dans le même dossier que YT-DLP.EXE." + "\n" + "Veuillez mettre l'application FFMPEG.EXE pour poursuivre.");
+                        MessageBox.Show("L'application FFMPEG.EXE n'existe pas dans le même dossier que YT-DLP.EXE." + "\n" + "Veuillez mettre l'application FFMPEG.EXE pour poursuivre.",this.Text,0,MessageBoxIcon.Warning);
 
                         return;
                     }
@@ -154,7 +156,7 @@ namespace AutoDL
                 }
                 else
                 {
-                    MessageBox.Show("Le fichier selectionner n'est pas yt-dlp.exe", "Auto DL - Error", 0, MessageBoxIcon.Error);
+                    MessageBox.Show("Le fichier selectionner n'est pas yt-dlp.exe", this.Text, 0, MessageBoxIcon.Error);
                 }
             }
         }
@@ -192,7 +194,7 @@ namespace AutoDL
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show($"Vérification de mise à jour interrompue : {ex.Message}", "Auto DL - Erreur", 0, MessageBoxIcon.Error);
                 return string.Empty;
             }
         }
@@ -236,7 +238,7 @@ namespace AutoDL
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show($"Vérification de mise à jour interrompue : {e.Message}",this.Text,0,MessageBoxIcon.Error);
                 }
             }
 
@@ -257,7 +259,7 @@ namespace AutoDL
                 }
                 catch (Exception e) 
                 {
-                    MessageBox.Show($"{e.Message}");
+                    MessageBox.Show($"{e.Message}", this.Text, 0, MessageBoxIcon.Error);
                 }
             }
 
@@ -266,7 +268,6 @@ namespace AutoDL
         private void btnUpg_Click(object sender, EventArgs e)
         {
             UpdateApp();
-           // UpgradeApp();
         }
     }
 }
