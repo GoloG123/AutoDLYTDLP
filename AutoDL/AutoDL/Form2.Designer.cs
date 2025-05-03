@@ -153,6 +153,7 @@
             this.CheckUpdate.TabIndex = 18;
             this.CheckUpdate.Text = "Mise à jour automatique";
             this.CheckUpdate.UseVisualStyleBackColor = true;
+            this.CheckUpdate.CheckedChanged += new System.EventHandler(this.CheckUpdate_CheckedChanged);
             // 
             // LblVersion
             // 
@@ -201,6 +202,7 @@
             this.CheckBoot.TabIndex = 15;
             this.CheckBoot.Text = "Démarrer automatiquement";
             this.CheckBoot.UseVisualStyleBackColor = true;
+            this.CheckBoot.CheckedChanged += new System.EventHandler(this.CheckBoot_CheckedChanged);
             // 
             // CheckMini
             // 
@@ -211,6 +213,7 @@
             this.CheckMini.TabIndex = 14;
             this.CheckMini.Text = "Démarrer minimiser";
             this.CheckMini.UseVisualStyleBackColor = true;
+            this.CheckMini.CheckedChanged += new System.EventHandler(this.CheckMini_CheckedChanged);
             // 
             // Form2
             // 

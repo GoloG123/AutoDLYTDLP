@@ -269,5 +269,17 @@ namespace AutoDL
         {
             UpdateApp();
         }
+
+       
+
+        private void CheckMini_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
