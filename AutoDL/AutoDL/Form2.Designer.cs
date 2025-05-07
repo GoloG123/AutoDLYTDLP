@@ -45,6 +45,8 @@
             this.textTime = new System.Windows.Forms.TextBox();
             this.CheckBoot = new System.Windows.Forms.CheckBox();
             this.CheckMini = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textTimeDif = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -166,11 +168,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.textTimeDif);
+            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.LblMinute);
             this.groupBox3.Controls.Add(this.textTime);
             this.groupBox3.Location = new System.Drawing.Point(316, 32);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(258, 73);
+            this.groupBox3.Size = new System.Drawing.Size(258, 95);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Téléchargement Automatique :";
@@ -215,6 +219,24 @@
             this.CheckMini.UseVisualStyleBackColor = true;
             this.CheckMini.CheckedChanged += new System.EventHandler(this.CheckMini_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(32, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(181, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Minutes premier démarrage : ";
+            // 
+            // textTimeDif
+            // 
+            this.textTimeDif.Location = new System.Drawing.Point(108, 68);
+            this.textTimeDif.Name = "textTimeDif";
+            this.textTimeDif.Size = new System.Drawing.Size(27, 22);
+            this.textTimeDif.TabIndex = 9;
+            this.textTimeDif.Text = "0";
+            this.textTimeDif.TextChanged += new System.EventHandler(this.textTimeDif_TextChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -257,5 +279,7 @@
         private System.Windows.Forms.Label LblVersion;
         private System.Windows.Forms.Button btnUpg;
         private System.Windows.Forms.CheckBox CheckUpdate;
+        private System.Windows.Forms.TextBox textTimeDif;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -33,11 +33,11 @@ namespace AutoDL
         private Form[] forms = new Form[5];
 
         public ListView ListviewInstance => listView1;
-        
-        public Form1()
+        private int _valeur;
+        public Form1(int valeur)
         {
             InitializeComponent();
-            
+            _valeur = valeur;
             ToolTip toolTip1 = new ToolTip();
             toolTip1.AutoPopDelay = 2500;
             toolTip1.InitialDelay = 500;
@@ -88,7 +88,6 @@ namespace AutoDL
             UnsubscribeFormClosing();
             ExitApp(e);
             ResubscribeFormClosing();
-           
         }
         
         
@@ -314,7 +313,6 @@ namespace AutoDL
         private void Form1_Load(object sender, EventArgs e)
         {
             ChargeConfig(); // chargement des données d'utilisateur sauvegardé
-
             if (Frm2.CheckMinit() == "True")
             {
                 Minize_it();
@@ -348,7 +346,7 @@ namespace AutoDL
             //notifyIcon.ShowBalloonTip(0, "Auto Download Youtube", "L'application est maintenant dans la barre de notification.", ToolTipIcon.Info);
         }
         public void ChargeConfig()
-        {                     
+        {
             try
             {
                 string FolderApp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AutoDl");
@@ -361,16 +359,29 @@ namespace AutoDL
                     
             string ChargeData = File.ReadAllText(ConfigFile);
             string[] data = ChargeData.Split(new char[] { ';' });
+                
+
+                if (_valeur > 0)
+                {
+                    Frm2.SetTime(int.Parse(data[3]));
+                    Frm2.SetTimeDif(_valeur);
+                    CountDown = _valeur * 60;
+                    timer1.Enabled = true;
+                }
+                else
+                {
+                    Frm2.SetTime(int.Parse(data[3]));
+                    if (int.Parse(data[3]) > 0)
+                    {
+                        CountDown = int.Parse(data[3]) * 60;
+                        timer1.Enabled = true;
+                    }
+                }
                 Frm2.SetCheckMini(bool.Parse(data[0]));
                 Frm2.SetCheckBoot(bool.Parse(data[1]));
                 Frm2.SetAutoUp(bool.Parse(data[2]));
-                Frm2.SetTime(int.Parse(data[3]));
                 Frm2.SetYTExe(data[4]);
-                if (int.Parse(data[3]) > 0)
-                {
-                    CountDown = int.Parse(data[3]) * 60;
-                    timer1.Enabled = true;
-                }
+
                 if (bool.Parse(data[2]) == true)
                 {
                     Frm2.UpdateApp();
@@ -378,7 +389,7 @@ namespace AutoDL
             }
             catch (Exception e)
             {
-                MessageBox.Show("Une erreur lors du chargement des données est survenue : {e.Message}", this.Text, 0, MessageBoxIcon.Error);
+                MessageBox.Show($"Une erreur lors du chargement des données est survenue : {e.Message}", this.Text, 0, MessageBoxIcon.Error);
             }           
             }
         private void ChargeData()

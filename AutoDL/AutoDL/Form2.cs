@@ -75,6 +75,10 @@ namespace AutoDL
         {
             textTime.Text = value.ToString();
         }
+        public void SetTimeDif(int value)
+        {
+            textTimeDif.Text = value.ToString();
+        }
         public void SetCheckMini(bool value)
         {
             CheckMini.Checked = value;
@@ -117,6 +121,7 @@ namespace AutoDL
         {
             if (CheckBoot.Checked == false)
             {
+                
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
                 key.SetValue("AutoDl", "");
             }
@@ -124,8 +129,16 @@ namespace AutoDL
             {
                 string cheminApplication = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 string cheminApplicationGuillement = $"\"{cheminApplication}\"";
-                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-                key.SetValue("AutoDl", cheminApplicationGuillement);
+                if (int.Parse(textTimeDif.Text) > 0)
+                {
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+                    key.SetValue("AutoDl", cheminApplicationGuillement + " -T:" + textTimeDif.Text);
+                }
+                else
+                {
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+                    key.SetValue("AutoDl", cheminApplicationGuillement);
+                }
             }
         }
 
@@ -280,6 +293,14 @@ namespace AutoDL
         private void CheckUpdate_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textTimeDif_TextChanged(object sender, EventArgs e)
+        {
+           if (!string.IsNullOrEmpty(textTimeDif.Text) && int.TryParse(textTimeDif.Text, out int diff))
+           {
+                CheckBoot_CheckedChanged(sender, e);
+            }
         }
     }
 }
