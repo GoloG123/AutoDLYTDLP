@@ -32,20 +32,24 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.BtnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.BtnClip = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.textbxLink = new System.Windows.Forms.TextBox();
             this.textbxDest = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.BtnSave = new System.Windows.Forms.Button();
-            this.BtnClip = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.LblLang = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.LblLang);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.BtnSave);
@@ -67,7 +71,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(152, 146);
+            this.label3.Location = new System.Drawing.Point(318, 146);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 16);
             this.label3.TabIndex = 37;
@@ -79,15 +83,25 @@
             this.comboBox2.Items.AddRange(new object[] {
             "webm",
             "m4a"});
-            this.comboBox2.Location = new System.Drawing.Point(155, 178);
+            this.comboBox2.Location = new System.Drawing.Point(321, 178);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 36;
             // 
+            // BtnSave
+            // 
+            this.BtnSave.Image = global::AutoDL.Properties.Resources.quick25px;
+            this.BtnSave.Location = new System.Drawing.Point(467, 166);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(60, 60);
+            this.BtnSave.TabIndex = 35;
+            this.BtnSave.UseVisualStyleBackColor = true;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 146);
+            this.label2.Location = new System.Drawing.Point(172, 146);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 16);
             this.label2.TabIndex = 34;
@@ -99,10 +113,30 @@
             this.comboBox1.Items.AddRange(new object[] {
             "webm",
             "mp4"});
-            this.comboBox1.Location = new System.Drawing.Point(9, 178);
+            this.comboBox1.Location = new System.Drawing.Point(175, 178);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 33;
+            // 
+            // BtnClip
+            // 
+            this.BtnClip.Image = global::AutoDL.Properties.Resources.BtnPastBis25px;
+            this.BtnClip.Location = new System.Drawing.Point(467, 36);
+            this.BtnClip.Name = "BtnClip";
+            this.BtnClip.Size = new System.Drawing.Size(60, 60);
+            this.BtnClip.TabIndex = 31;
+            this.BtnClip.UseVisualStyleBackColor = true;
+            this.BtnClip.Click += new System.EventHandler(this.BtnClip_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = global::AutoDL.Properties.Resources.BtnFolder25px;
+            this.button1.Location = new System.Drawing.Point(467, 102);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 60);
+            this.button1.TabIndex = 28;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textbxLink
             // 
@@ -139,35 +173,25 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "Dossier destination :";
             // 
-            // BtnSave
+            // LblLang
             // 
-            this.BtnSave.Image = global::AutoDL.Properties.Resources.quick25px;
-            this.BtnSave.Location = new System.Drawing.Point(467, 166);
-            this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(60, 60);
-            this.BtnSave.TabIndex = 35;
-            this.BtnSave.UseVisualStyleBackColor = true;
-            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            this.LblLang.AutoSize = true;
+            this.LblLang.Location = new System.Drawing.Point(18, 146);
+            this.LblLang.Name = "LblLang";
+            this.LblLang.Size = new System.Drawing.Size(104, 16);
+            this.LblLang.TabIndex = 38;
+            this.LblLang.Text = "Langue préféré :";
             // 
-            // BtnClip
+            // comboBox3
             // 
-            this.BtnClip.Image = global::AutoDL.Properties.Resources.BtnPastBis25px;
-            this.BtnClip.Location = new System.Drawing.Point(467, 36);
-            this.BtnClip.Name = "BtnClip";
-            this.BtnClip.Size = new System.Drawing.Size(60, 60);
-            this.BtnClip.TabIndex = 31;
-            this.BtnClip.UseVisualStyleBackColor = true;
-            this.BtnClip.Click += new System.EventHandler(this.BtnClip_Click);
-            // 
-            // button1
-            // 
-            this.button1.Image = global::AutoDL.Properties.Resources.BtnFolder25px;
-            this.button1.Location = new System.Drawing.Point(467, 102);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 60);
-            this.button1.TabIndex = 28;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "fr-FR",
+            "en-US"});
+            this.comboBox3.Location = new System.Drawing.Point(21, 178);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 24);
+            this.comboBox3.TabIndex = 39;
             // 
             // Form4
             // 
@@ -202,5 +226,7 @@
         private System.Windows.Forms.TextBox textbxDest;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label LblLang;
     }
 }

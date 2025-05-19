@@ -31,24 +31,28 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.BtnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.BtnClip = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtNumber = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.textbxLink = new System.Windows.Forms.TextBox();
             this.textbxDest = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.BtnSave = new System.Windows.Forms.Button();
-            this.BtnClip = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.LblLang = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.LblLang);
+            this.groupBox1.Controls.Add(this.comboBox3);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.BtnSave);
@@ -90,7 +94,17 @@
             this.comboBox2.Location = new System.Drawing.Point(440, 235);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
-            this.comboBox2.TabIndex = 36;
+            this.comboBox2.TabIndex = 28;
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.Image = global::AutoDL.Properties.Resources.AddBtn;
+            this.BtnSave.Location = new System.Drawing.Point(680, 215);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(60, 60);
+            this.BtnSave.TabIndex = 29;
+            this.BtnSave.UseVisualStyleBackColor = true;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // label2
             // 
@@ -111,7 +125,17 @@
             this.comboBox1.Location = new System.Drawing.Point(295, 235);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 33;
+            this.comboBox1.TabIndex = 27;
+            // 
+            // BtnClip
+            // 
+            this.BtnClip.Image = global::AutoDL.Properties.Resources.BtnPastBis25px;
+            this.BtnClip.Location = new System.Drawing.Point(680, 36);
+            this.BtnClip.Name = "BtnClip";
+            this.BtnClip.Size = new System.Drawing.Size(60, 60);
+            this.BtnClip.TabIndex = 31;
+            this.BtnClip.UseVisualStyleBackColor = true;
+            this.BtnClip.Click += new System.EventHandler(this.BtnClip_Click);
             // 
             // label7
             // 
@@ -127,7 +151,7 @@
             this.txtNumber.Location = new System.Drawing.Point(9, 235);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(39, 22);
-            this.txtNumber.TabIndex = 27;
+            this.txtNumber.TabIndex = 25;
             this.txtNumber.Text = "1";
             // 
             // txtName
@@ -135,7 +159,7 @@
             this.txtName.Location = new System.Drawing.Point(6, 107);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(668, 22);
-            this.txtName.TabIndex = 22;
+            this.txtName.TabIndex = 23;
             // 
             // label5
             // 
@@ -146,13 +170,23 @@
             this.label5.TabIndex = 29;
             this.label5.Text = "Nom :";
             // 
+            // button1
+            // 
+            this.button1.Image = global::AutoDL.Properties.Resources.BtnFolder25px;
+            this.button1.Location = new System.Drawing.Point(680, 149);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 60);
+            this.button1.TabIndex = 30;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // textbxLink
             // 
             this.textbxLink.AccessibleDescription = "Liens vers video / playliste youtube";
             this.textbxLink.Location = new System.Drawing.Point(6, 55);
             this.textbxLink.Name = "textbxLink";
             this.textbxLink.Size = new System.Drawing.Size(668, 22);
-            this.textbxLink.TabIndex = 23;
+            this.textbxLink.TabIndex = 22;
             // 
             // textbxDest
             // 
@@ -181,35 +215,27 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "Dossier destination :";
             // 
-            // BtnSave
+            // comboBox3
             // 
-            this.BtnSave.Image = global::AutoDL.Properties.Resources.AddBtn;
-            this.BtnSave.Location = new System.Drawing.Point(680, 215);
-            this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(60, 60);
-            this.BtnSave.TabIndex = 35;
-            this.BtnSave.UseVisualStyleBackColor = true;
-            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "fr-FR",
+            "en-US"});
+            this.comboBox3.Location = new System.Drawing.Point(146, 235);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 24);
+            this.comboBox3.TabIndex = 26;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
-            // BtnClip
+            // LblLang
             // 
-            this.BtnClip.Image = global::AutoDL.Properties.Resources.BtnPastBis25px;
-            this.BtnClip.Location = new System.Drawing.Point(680, 36);
-            this.BtnClip.Name = "BtnClip";
-            this.BtnClip.Size = new System.Drawing.Size(60, 60);
-            this.BtnClip.TabIndex = 31;
-            this.BtnClip.UseVisualStyleBackColor = true;
-            this.BtnClip.Click += new System.EventHandler(this.BtnClip_Click);
-            // 
-            // button1
-            // 
-            this.button1.Image = global::AutoDL.Properties.Resources.BtnFolder25px;
-            this.button1.Location = new System.Drawing.Point(680, 149);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 60);
-            this.button1.TabIndex = 28;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.LblLang.AutoSize = true;
+            this.LblLang.Location = new System.Drawing.Point(143, 206);
+            this.LblLang.Name = "LblLang";
+            this.LblLang.Size = new System.Drawing.Size(109, 16);
+            this.LblLang.TabIndex = 39;
+            this.LblLang.Text = "Langue préféré* :";
             // 
             // Form3
             // 
@@ -248,5 +274,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label LblLang;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }

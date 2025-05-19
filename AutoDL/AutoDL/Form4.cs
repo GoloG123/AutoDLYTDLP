@@ -29,6 +29,7 @@ namespace AutoDL
             toolTip1.SetToolTip(BtnSave, "Démarrer le téléchargement.");
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 1;
         }
         private void Form4_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -38,6 +39,8 @@ namespace AutoDL
                 textbxLink.Text = null;
                 comboBox1.SelectedIndex = 0;
                 comboBox2.SelectedIndex = 0;
+                comboBox3.SelectedIndex = 1;
+                
                this.Hide();
             }
         }
@@ -74,7 +77,7 @@ namespace AutoDL
         {
             if (textbxLink.Text != "")
             {
-                mainForm.StartProcessYTDLP(1, textbxLink.Text, textbxDest.Text, comboBox1.Text, comboBox2.Text,null);
+                mainForm.StartProcessYTDLP(1, textbxLink.Text, textbxDest.Text, comboBox1.Text, comboBox2.Text,comboBox3.Text,null);
                 this.Close();
             }
             else
@@ -84,7 +87,7 @@ namespace AutoDL
                     string ClipB = Clipboard.GetText();
                     if (ClipB.Contains("youtu"))
                     {
-                        mainForm.StartProcessYTDLP(1, ClipB, textbxDest.Text, comboBox1.Text, comboBox2.Text,null);
+                        mainForm.StartProcessYTDLP(1, ClipB, textbxDest.Text, comboBox1.Text, comboBox2.Text, comboBox3.Text,null);
                         this.Close();
 
                     }

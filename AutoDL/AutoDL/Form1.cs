@@ -104,7 +104,7 @@ namespace AutoDL
        
         public void Lancement_Click(object sender, EventArgs e)
         {
-            StartProcessYTDLP(0,null,null,null,null,null);
+            StartProcessYTDLP(0,null,null,null,null,null,null);
         }
         public void Restaurer_Click(object sender, EventArgs e)
         {
@@ -120,7 +120,7 @@ namespace AutoDL
             }
         }
         
-        public async void StartProcessYTDLP(int Q,string QLink, string QDesti, string QFormatV, string QFormatA, string Qnb)
+        public async void StartProcessYTDLP(int Q,string QLink, string QDesti, string QFormatV, string QFormatA, string QFormatL, string Qnb)
         {
            
             ProgressBar bar = new ProgressBar();
@@ -134,11 +134,11 @@ namespace AutoDL
             LblTimeFinish.Text = "";
             DateTime StartTime = DateTime.Now;
 
-            string AdressAp = Frm2.GetYTexe(); // variable chemin application YT-DLP
+            string AdressAp = Frm2.GetYTexe(); 
 
             switch (Q)
             {
-                case 0:
+                case 0: // Fonction Telechargement via Timer
 
                     List<string> YTLink = new List<string>();
                     List<string> OutPath = new List<string>();
@@ -146,6 +146,7 @@ namespace AutoDL
                     List<string> Name = new List<string>();
                     List<string> FormatV = new List<string>();
                     List<string> FormatA = new List<string>();
+                    List<string> FormatL = new List<string>();
 
 
 
@@ -163,6 +164,8 @@ namespace AutoDL
                             NumberV.Add(item.SubItems[4].Text);
                             FormatV.Add(item.SubItems[5].Text);
                             FormatA.Add(item.SubItems[6].Text);
+                            FormatL.Add(item.SubItems[7].Text);
+                            
                         }
                     }
 
@@ -176,7 +179,8 @@ namespace AutoDL
 
                     for (int j = 0; j < YTLink.Count; j++)
                     {
-                        string ArguDLp = $"-f bestvideo[ext={FormatV[j]}]+bestaudio[language='fr-FR'][ext={FormatA[j]}]/bestvideo[ext={FormatV[j]}]+bestaudio[ext={FormatA[j]}] "; // argument envoyé a YT-DLP.exe
+
+                        string ArguDLp = $"-f bestvideo[ext={FormatV[j]}]+bestaudio[language='{FormatL[j]}'][ext={FormatA[j]}]/bestvideo[ext={FormatV[j]}]+bestaudio[ext={FormatA[j]}] "; // argument envoyé a YT-DLP.exe
                         string OutP = OutPath[j] + "%(upload_date)s - %(title)s.%(ext)s"; // ARGUMENT
                         string Yt = YTLink[j]; // Adresse video Youtube ou Channel Youtube
                         string nb = NumberV[j]; // Nombres de video a telecharger si chaine
@@ -187,7 +191,7 @@ namespace AutoDL
 
                         string Atr;
 
-                        if (Yt.Contains("@"))
+                        if (Yt.Contains("@")) // Verifie si c'est une chaine youtube
                         {
                             status.Text = "En cours... " + Names;
                             Atr = ArguDLp + Yt + " --playlist-end " + nb + " -o " + $"\"{OutP}\"";
@@ -204,7 +208,7 @@ namespace AutoDL
                             t.StartInfo.Arguments = Atr; // on donne l'argument stocker dans la variable Atr
                             t.StartInfo.FileName = AdressAp; // on définit où est l'application yt-dlp définit par l'user
                             t.StartInfo.UseShellExecute = true;
-                            t.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                       //     t.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                             t.Start();
                             await Task.Run(() => t.WaitForExit()); // on attend qu'elle termine mais en permettant l'utilisation de la fenetre
                         }
@@ -228,8 +232,9 @@ namespace AutoDL
                     }
                     bar.Visible = false;
                     break;
-                case 1:
-                    string QDlp = $"-f bestvideo[ext={QFormatV}]+bestaudio[language='fr-FR'][ext={QFormatA}]/bestvideo[ext={QFormatV}]+bestaudio[ext={QFormatA}] "; // argument envoyé a YT-DLP.exe
+
+                case 1: // Telechargement Rapide
+                    string QDlp = $"-f bestvideo[ext={QFormatV}]+bestaudio[language='{QFormatL}'][ext={QFormatA}]/bestvideo[ext={QFormatV}]+bestaudio[ext={QFormatA}] "; // argument envoyé a YT-DLP.exe
                     string QArg = QDlp + QLink + " -o " + QDesti + @"%(title)s.%(ext)s";
                     bar.Value = 90;
                     try
@@ -271,7 +276,7 @@ namespace AutoDL
                           timer1.Enabled = false;
                         }
 
-                        string SDlp = $"-f bestvideo[ext={QFormatV}]+bestaudio[language='fr-FR'][ext={QFormatA}]/bestvideo[ext={QFormatV}]+bestaudio[ext={QFormatA}] "; // argument envoyé a YT-DLP.exe
+                        string SDlp = $"-f bestvideo[ext={QFormatV}]+bestaudio[language='{QFormatL}'][ext={QFormatA}]/bestvideo[ext={QFormatV}]+bestaudio[ext={QFormatA}] "; // argument envoyé a YT-DLP.exe
                         string Desti = QDesti + "%(upload_date)s - %(title)s.%(ext)s";
                         string SAtr = SDlp + QLink + " --playlist-end " + Qnb + " -o " + "\"" + Desti + "\"";
                         Process t = new Process(); // creation du process T pour lancer l'application externe.
@@ -307,7 +312,7 @@ namespace AutoDL
         } 
         private void button2_Click(object sender, EventArgs e)
         {
-            StartProcessYTDLP(0,null,null,null,null,null); // lancement du process de telechargement    
+            StartProcessYTDLP(0,null,null,null,null,null, null); // lancement du process de telechargement    
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -327,6 +332,7 @@ namespace AutoDL
             listView1.Columns.Add("Nombre Vidéo");
             listView1.Columns.Add("Format Vidéo");
             listView1.Columns.Add("Format Audio");
+            listView1.Columns.Add("Format Langue");
             listView1.GridLines = true;
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             status.Text = "Temps restant : " + Frm2.TimeValue();
@@ -421,6 +427,7 @@ namespace AutoDL
                             item.SubItems.Add(columns[4]);
                             item.SubItems.Add(columns[5]);
                             item.SubItems.Add(columns[6]);
+                            item.SubItems.Add(columns[7]);
                             listView1.Items.Add(item);
                             listView1.Refresh();
                             
@@ -575,7 +582,7 @@ namespace AutoDL
             else
             {
             timer1.Stop();
-                StartProcessYTDLP(0,null,null,null,null,null);
+                StartProcessYTDLP(0,null,null,null,null,null, null);
             }
 
         }
@@ -662,7 +669,8 @@ namespace AutoDL
             string NbV = listView1.SelectedItems[0].SubItems[4].Text;
             string FormatV = listView1.SelectedItems[0].SubItems[5].Text;
             string FormatA = listView1.SelectedItems[0].SubItems[6].Text;
-            StartProcessYTDLP(2, YTLink, Path, FormatV, FormatA, NbV);          
+            string FormatL = listView1.SelectedItems[0].SubItems[7].Text;
+            StartProcessYTDLP(2, YTLink, Path, FormatV, FormatA, NbV, FormatL);          
         }
 
         private void ModifyItem_Click(object sender, EventArgs e)
@@ -678,8 +686,9 @@ namespace AutoDL
             string Nb = selecteditem.SubItems[4].Text;
             string FormatV = selecteditem.SubItems[5].Text;
             string FormatA = selecteditem.SubItems[6].Text;
+            string FormatL = selecteditem.SubItems[7].Text;
 
-            Frm3.Modify(name, YtLink, Path, FormatV, FormatA, Nb);
+            Frm3.Modify(name, YtLink, Path, FormatV, FormatA, Nb, FormatL);
             Frm3.Show();
             Frm3.BringToFront();
         }

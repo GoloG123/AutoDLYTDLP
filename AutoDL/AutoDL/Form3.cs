@@ -32,8 +32,10 @@ namespace AutoDL
             toolTip1.SetToolTip(BtnClip,"Coller le lien youtube ici, si channel le nom est automatiquement inserer.");
             toolTip1.SetToolTip(button1, "Selectionner le dossier de destination pour le telechargement");
             toolTip1.SetToolTip(BtnSave, "Ajouter à la liste");
+            toolTip1.SetToolTip(LblLang, "Selon langue disponible sur la vidéo");
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 1;
         }
       
 
@@ -92,6 +94,7 @@ namespace AutoDL
                         item1.SubItems.Add(txtNumber.Text);
                         item1.SubItems.Add(comboBox1.Text);
                         item1.SubItems.Add(comboBox2.Text);
+                        item1.SubItems.Add(comboBox3.Text);
                         item1.Checked = true;
                         mainForm.ListviewInstance.Items.Add(item1);
                         mainForm.ListviewInstance.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -110,6 +113,7 @@ namespace AutoDL
                             selecteditem.SubItems[4].Text = txtNumber.Text;
                             selecteditem.SubItems[5].Text = comboBox1.Text;
                             selecteditem.SubItems[6].Text = comboBox2.Text;
+                            selecteditem.SubItems[7].Text = comboBox3.Text;
                             mainForm.ListviewInstance.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                             mainForm.SetButSave(true);
                             this.Hide();
@@ -143,16 +147,22 @@ namespace AutoDL
             }
             
         }
-        public void Modify(string name, string ytlink , string path, string FormatV, string FormatA, string Nb)
+        public void Modify(string name, string ytlink , string path, string FormatV, string FormatA, string Nb, string FormatL)
         {
             txtName.Text = name;
             textbxLink.Text = ytlink;
             textbxDest.Text = path;
             comboBox1.Text = FormatV;
             comboBox2.Text = FormatA;
+            comboBox3.Text = FormatL;
             txtNumber.Text = Nb;
             ModifyOn = true;
 
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
